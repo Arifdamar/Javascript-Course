@@ -4,6 +4,10 @@ const form = document.querySelector('form');
 const input = document.querySelector('#txtTaskName');
 const btnDeleteAll = document.querySelector('#btnDeleteAll');
 const taskList = document.querySelector('#task-list');
+let items;
+
+// load items
+loadItems();
 
 // call eventlisteners
 eventlisteners();
@@ -20,16 +24,47 @@ function eventlisteners() {
 
 }
 
-// adding a new item
-function addNewItem(e) {
-    if (input.value === '') {
-        alert('Please enter a task');
-    }
+function loadItems() {
 
+    items = getItemsFromLS();
+
+    items.forEach(function (item) {
+        createItem(item);
+    })
+}
+
+// Get items from Local storage
+function getItemsFromLS() {
+    if (localStorage.getItem('items') === null) {
+        items = [];
+    } else {
+        items = JSON.parse(localStorage.getItem('items'));
+    }
+    return items;
+}
+
+// set item to local storage
+function setItemToLS(text) {
+    items = getItemsFromLS();
+    items.push(text);
+    localStorage.setItem('items', JSON.stringify(items));
+}
+
+function deteteItemFromLS(text) {
+    items = getItemsFromLS();
+    items.forEach(function (item, index) {
+        if (item === text) {
+            items.splice(index, 1);
+        }
+    });
+    localStorage.setItem('items', JSON.stringify(items));
+}
+
+function createItem(text) {
     // Create li
     const li = document.createElement('li');
     li.className = 'list-group-item list-group-item-secondary';
-    li.appendChild(document.createTextNode(input.value));
+    li.appendChild(document.createTextNode(text));
 
     // Create a
     const a = document.createElement('a');
@@ -42,6 +77,19 @@ function addNewItem(e) {
 
     // Append li to ul
     taskList.appendChild(li);
+}
+
+// adding a new item
+function addNewItem(e) {
+    if (input.value === '') {
+        alert('Please enter a task');
+    }
+
+    // create item
+    createItem(input.value);
+
+    // save to local storage
+    setItemToLS(input.value);
 
     // clear input
     input.value = '';
@@ -53,6 +101,9 @@ function addNewItem(e) {
 function deleteItem(e) {
     if (e.target.className === 'fas fa-times') {
         e.target.parentNode.parentNode.remove();
+
+        // delete item from local storage
+        deteteItemFromLS(e.target.parentNode.parentNode.textContent);
     };
     e.preventDefault();
 }
@@ -61,12 +112,11 @@ function deleteItem(e) {
 function deleteAllItems(e) {
 
     if (confirm("Are you sure you want to delete?")) {
-        const length = taskList.children.length;
-
-        for (let index = 0; index < length; index++) {
-            let firstChild = taskList.children[0];
-            firstChild.remove();
+        while (taskList.firstChild) {
+            taskList.removeChild(taskList.firstChild);
         }
+        
+        localStorage.clear();
     }
     e.preventDefault();
 }
