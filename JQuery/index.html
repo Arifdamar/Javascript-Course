@@ -10,19 +10,45 @@
 
 <body>
     <a href="#">link1</a>
-    <h3>JQuery Studies</h3>
+    <h3 id="header">JQuery Studies</h3>
     <ul id="list">
         <li class="item">JQuery Reference</li>
         <li>Selectors <a href="#">link2</a></li>
         <li class="item">JQuery Plugins</li>
     </ul>
     <script>
+        /*
+        **Selectors**
         console.log($("#list"));
         console.log($("h3"));
         console.log($("li"));
         console.log($(".item"));
         console.log($("a"));
         console.log($("li a"));
+        */
+
+
+        $("#header").css("color", "blue");
+        $("#list a").css("text-decoration", "none");
+
+        var styles ={
+            color: "yellow",
+            fontSize: "20px",
+            border: "1px solid red"
+        }
+
+        $("ul li").css(styles);
+
+        $("a").css({
+            color: "green",
+            fontSize: "15px",
+            border: "2px solid purple"
+        });
+
+        $(".item").css({
+            display: "none"
+        })
+    
     </script>
 </body>
 
