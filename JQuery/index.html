@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jquery</title>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
+
 <body>
-    
+    <a href="#">link1</a>
+    <h3>JQuery Studies</h3>
+    <ul id="list">
+        <li class="item">JQuery Reference</li>
+        <li>Selectors <a href="#">link2</a></li>
+        <li class="item">JQuery Plugins</li>
+    </ul>
+    <script>
+        console.log($("#list"));
+        console.log($("h3"));
+        console.log($("li"));
+        console.log($(".item"));
+        console.log($("a"));
+        console.log($("li a"));
+    </script>
 </body>
+
 </html>
