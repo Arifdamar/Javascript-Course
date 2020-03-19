@@ -6,9 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jquery</title>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <style>
+        .highlight{
+            background-color: yellow;
+        }
+        .green{
+            background-color: green;
+        }
+        .red{
+            background-color: red;
+        }
+    </style>
+
 </head>
 
 <body>
+    <!-- 
+        Selectors and css
     <a href="#">link1</a>
     <h3 id="header">JQuery Studies</h3>
     <ul id="list">
@@ -16,7 +31,44 @@
         <li>Selectors <a href="#">link2</a></li>
         <li class="item">JQuery Plugins</li>
     </ul>
+    -->
+    <h1>JQuery Helper Methods</h1>
+
+    <ul>
+        <li>Jquery Selectors</li>
+        <li>Jquery Methods</li>
+        <li>Jquery Animations</li>
+    </ul>
+
+    <img src="image/koala.jpg" width="150" alt="">
+
+    <input id="name" type="text" placeholder="Name" />
+    <input id="surname" class="green" type="text" placeholder="Surname" />
+    <button id="btnSave" onclick="FullName();">Save</button>
+    
     <script>
+
+            
+        console.log($("h1").text());
+        console.log($("ul").text());
+        console.log($("ul li").text());
+
+        $("h1").text("Javascript");
+        
+        console.log($("input").val());
+
+        $("img").attr("width","250");
+
+        function FullName() {
+            var ad = $("#name").val();
+            var soyad = $("#surname").val();
+
+            console.log("Name: " + ad + " Surname: " + soyad);
+            $("#name").addClass("highlight");
+            $("#surname").removeClass("green");
+            $("h1").toggleClass("red");
+        }
+
         /*
         **Selectors**
         console.log($("#list"));
@@ -27,7 +79,8 @@
         console.log($("li a"));
         */
 
-
+        /*
+        **CSS**
         $("#header").css("color", "blue");
         $("#list a").css("text-decoration", "none");
 
@@ -48,7 +101,7 @@
         $(".item").css({
             display: "none"
         })
-    
+        */
     </script>
 </body>
 
