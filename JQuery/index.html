@@ -90,13 +90,75 @@
     <p id="p1">Web Developer Course From Scratch</p>
     <p id="p2">Web Developer Course From Scratch</p>
 
+    <!--
+        **JQuery Effects (show-hide)**
     <button id="hide">Hide</button>
     <button id="show">Show</button>
     <button id="toggle">Toggle</button>
-
+    -->
     
+    <button id="slideup">Slide Up</button>
+    <button id="slidedown">Slide Down</button>
+    <button id="slidetoggle">Slide Toggle</button>
+<br><br>
+    <button id="fadein">Fade In</button>
+    <button id="fadeout">Fade Out</button>
+    <button id="fadeto">Fade To</button>
+    
+    <button id="fadetoggle">Fade Toggle</button>
+
     <script>
 
+        $(document).ready(function() {
+
+            $("#slideup").click(function() {
+                $("#p2").slideUp(1000, function(){
+                    $("#p1").slideUp(1000);
+                });
+            });
+
+            $("#slidedown").click(function() {
+                $("#p2").slideDown(1000, function(){
+                    $("#p1").slideDown(1000);
+                });
+            });
+
+            $("#slidetoggle").click(function() {
+                $("#p2").slideToggle(1000, function(){
+                    $("#p1").slideToggle(1000);
+                });
+            });
+
+
+            $("#fadein").click(function() {
+                $("#p2").fadeIn(1000, function(){
+                    $("#p1").fadeIn(1000);
+                });
+            });
+
+            $("#fadeout").click(function() {
+                $("#p2").fadeOut(1000, function(){
+                    $("#p1").fadeOut(1000);
+                });
+            });
+
+            $("#fadeto").click(function() {
+                $("#p2").fadeTo(1000,0.3,function(){
+                    $("#p1").fadeTo(1000,0.3);
+                });
+            });
+
+            $("#fadetoggle").click(function() {
+                $("#p2").fadeToggle(1000, function(){
+                    $("#p1").fadeToggle(1000);
+                });
+            });
+
+
+        });
+
+        /*
+        **JQuery Effects (show-hide)**
         $(document).ready(function() {
 
             $("#hide").click(function() {
@@ -117,9 +179,7 @@
                 });
             });
         });
-
-
-
+        */
 
         /*
         **Change Event**
