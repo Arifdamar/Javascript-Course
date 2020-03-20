@@ -8,6 +8,8 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
     <style>
+        /*
+        **JQuery Methods**
         .highlight{
             background-color: yellow;
         }
@@ -16,6 +18,12 @@
         }
         .red{
             background-color: red;
+        }
+        */
+    
+        .paragraphColor{
+            color:red;
+            font-size: 25px;
         }
     </style>
 
@@ -32,6 +40,9 @@
         <li class="item">JQuery Plugins</li>
     </ul>
     -->
+   
+    <!--
+        **JQuery Methods**
     <h1>JQuery Helper Methods</h1>
 
     <ul>
@@ -45,10 +56,29 @@
     <input id="name" type="text" placeholder="Name" />
     <input id="surname" class="green" type="text" placeholder="Surname" />
     <button id="btnSave" onclick="FullName();">Save</button>
+    -->
+
+    <p id="p1">Web Developer Course</p>
     
+    <p id="p2">Web Developer Course</p>
+    
+    <p class="paragraph">Web Developer Course</p>
+    
+    <p class="paragraph">Web Developer Course</p>
+
+
+
     <script>
 
-            
+        $(document).ready(function() {
+            $(".paragraph").click(function() {
+                $(this).toggleClass("paragraphColor");
+            })
+        });
+
+
+        /*   
+        **JQuery Methods**
         console.log($("h1").text());
         console.log($("ul").text());
         console.log($("ul li").text());
@@ -68,15 +98,6 @@
             $("#surname").removeClass("green");
             $("h1").toggleClass("red");
         }
-
-        /*
-        **Selectors**
-        console.log($("#list"));
-        console.log($("h3"));
-        console.log($("li"));
-        console.log($(".item"));
-        console.log($("a"));
-        console.log($("li a"));
         */
 
         /*
@@ -102,6 +123,17 @@
             display: "none"
         })
         */
+
+        /*
+        **Selectors**
+        console.log($("#list"));
+        console.log($("h3"));
+        console.log($("li"));
+        console.log($(".item"));
+        console.log($("a"));
+        console.log($("li a"));
+        */
+
     </script>
 </body>
 
