@@ -28,10 +28,18 @@
             font-size: 25px;
         }
         */
+  
+        #box{
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            width: 200px;
+            height: 200px;
+            background-color:blue;
+        }
+  
     </style>
-
 </head>
-
 <body>
     <!-- 
         Selectors and css
@@ -87,28 +95,63 @@
     </form>
     -->
     
+    <!--
+    **JQuery Effects (slide-fade)**
     <p id="p1">Web Developer Course From Scratch</p>
     <p id="p2">Web Developer Course From Scratch</p>
 
-    <!--
-        **JQuery Effects (show-hide)**
-    <button id="hide">Hide</button>
-    <button id="show">Show</button>
-    <button id="toggle">Toggle</button>
-    -->
+    
+            **JQuery Effects (show-hide)**
+        <button id="hide">Hide</button>
+        <button id="show">Show</button>
+        <button id="toggle">Toggle</button>
+    
     
     <button id="slideup">Slide Up</button>
     <button id="slidedown">Slide Down</button>
     <button id="slidetoggle">Slide Toggle</button>
-<br><br>
+    <br><br>
     <button id="fadein">Fade In</button>
     <button id="fadeout">Fade Out</button>
     <button id="fadeto">Fade To</button>
     
     <button id="fadetoggle">Fade Toggle</button>
+    -->
+   
+   <button id="animate">
+       Animate
+   </button>
 
-    <script>
+    <div id="box">
 
+    </div>
+   <script>
+
+       let box = $("#box");
+
+       $(document).ready(function() {
+           $("#animate").click(function() {
+                box.animate(
+                    {
+                    left: 250,
+                    width: 300,
+                    height: 300
+                    }, 2000, function() {
+                        box.animate({
+                            top: 300,
+                            width: 200,
+                            height: 200
+                        },1500)
+                    }
+                );
+           });
+            
+       });
+
+
+
+        /*
+        **JQuery Effects (slide-fade)**
         $(document).ready(function() {
 
             $("#slideup").click(function() {
@@ -156,6 +199,7 @@
 
 
         });
+        */
 
         /*
         **JQuery Effects (show-hide)**
