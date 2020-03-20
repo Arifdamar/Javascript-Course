@@ -72,6 +72,8 @@
     <p class="paragraph">Web Developer Course</p>
     -->
 
+    <!--
+    **Change Event**
     <form action="">
         <p>
             Name: <input class="control" type="text">
@@ -83,15 +85,50 @@
                     </select>
         </p>
     </form>
+    -->
+    
+    <p id="p1">Web Developer Course From Scratch</p>
+    <p id="p2">Web Developer Course From Scratch</p>
 
+    <button id="hide">Hide</button>
+    <button id="show">Show</button>
+    <button id="toggle">Toggle</button>
+
+    
     <script>
 
+        $(document).ready(function() {
+
+            $("#hide").click(function() {
+                $("#p1").hide(500, function(){
+                    $("#p2").hide(1000);
+                });
+            });
+
+            $("#show").click(function() {
+                $("#p1").show(1000, function(){
+                    $("#p2").show(1000);
+                });
+            });
+
+            $("#toggle").click(function() {
+                $("#p1").toggle(1000, function(){
+                    $("#p2").toggle(1000);
+                });
+            });
+        });
+
+
+
+
+        /*
+        **Change Event**
         $(document).ready(function() {
             $(".control").change(function() {
                 console.log($(this).val());
             })
         });
-
+        */
 
         /*
         **Click Event**
