@@ -20,11 +20,14 @@
             background-color: red;
         }
         */
-    
+
+        /*
+            **Click Event**
         .paragraphColor{
             color:red;
             font-size: 25px;
         }
+        */
     </style>
 
 </head>
@@ -40,7 +43,7 @@
         <li class="item">JQuery Plugins</li>
     </ul>
     -->
-   
+
     <!--
         **JQuery Methods**
     <h1>JQuery Helper Methods</h1>
@@ -58,6 +61,8 @@
     <button id="btnSave" onclick="FullName();">Save</button>
     -->
 
+    <!--
+        **Click Event**
     <p id="p1">Web Developer Course</p>
     
     <p id="p2">Web Developer Course</p>
@@ -65,17 +70,37 @@
     <p class="paragraph">Web Developer Course</p>
     
     <p class="paragraph">Web Developer Course</p>
+    -->
 
-
+    <form action="">
+        <p>
+            Name: <input class="control" type="text">
+        </p>
+        <p>
+            Hobies: <select class="control">
+                        <option value="workout">Work Out</option>
+                        <option value="cinema">Cinema</option>
+                    </select>
+        </p>
+    </form>
 
     <script>
 
+        $(document).ready(function() {
+            $(".control").change(function() {
+                console.log($(this).val());
+            })
+        });
+
+
+        /*
+        **Click Event**
         $(document).ready(function() {
             $(".paragraph").click(function() {
                 $(this).toggleClass("paragraphColor");
             })
         });
-
+        */
 
         /*   
         **JQuery Methods**
@@ -133,7 +158,6 @@
         console.log($("a"));
         console.log($("li a"));
         */
-
     </script>
 </body>
 
