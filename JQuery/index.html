@@ -29,6 +29,8 @@
         }
         */
   
+        /*
+       **JQuery Effects (animate)**
         #box{
             position: absolute;
             top: 50px;
@@ -37,7 +39,40 @@
             height: 200px;
             background-color:blue;
         }
+        */
   
+        body{
+            margin: 0;
+            padding: 0;
+        }
+
+        #message-box{
+            background-color: green;
+            text-align: center;
+            color: white;
+        }
+
+        #header{
+            cursor: pointer;
+            height: 25px;
+            padding: 10px;
+            border-bottom: 1px solid #fff;
+        }
+
+        #content{
+            height: 200px;
+            padding: 10px;
+            display: none;
+        }
+
+        #close{
+            float: right;
+        }
+
+        #close:hover{
+            color: red;
+        }
+
     </style>
 </head>
 <body>
@@ -118,37 +153,63 @@
     <button id="fadetoggle">Fade Toggle</button>
     -->
    
+    <!--
    <button id="animate">
        Animate
    </button>
 
     <div id="box">
-
     </div>
+    -->
+   
+    
+   <div id="message-box">
+       <div id="header">
+           You have a message!
+           <span id="close">X</span>
+       </div>
+       <div id="content">
+
+       </div>
+   </div>
+   
    <script>
 
-       let box = $("#box");
+        $(document).ready(function(){
 
-       $(document).ready(function() {
-           $("#animate").click(function() {
-                box.animate(
-                    {
-                    left: 250,
-                    width: 300,
-                    height: 300
-                    }, 2000, function() {
-                        box.animate({
-                            top: 300,
-                            width: 200,
-                            height: 200
-                        },1500)
-                    }
-                );
-           });
-            
-       });
+            $("#header").click(function(){
+                $("#content").toggle("slow");
+            });
+
+            $("#close").click(function(){
+                $("#message-box").hide("slow");
+            })
+        });
 
 
+        /*
+        **JQuery Effects (animate)**
+        let box = $("#box");
+
+        $(document).ready(function() {
+            $("#animate").click(function() {
+                    box.animate(
+                        {
+                        left: 250,
+                        width: 300,
+                        height: 300
+                        }, 2000, function() {
+                            box.animate({
+                                top: 300,
+                                width: 200,
+                                height: 200
+                            },1500)
+                        }
+                    );
+            });
+                
+        });
+        */
 
         /*
         **JQuery Effects (slide-fade)**
@@ -243,7 +304,7 @@
         });
         */
 
-        /*   
+        /*
         **JQuery Methods**
         console.log($("h1").text());
         console.log($("ul").text());
