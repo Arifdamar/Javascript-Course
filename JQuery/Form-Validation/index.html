@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Document</title>
+
+    <style>
+        #error {
+            color: red;
+            text-align: left;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container mt-5">
+
+        <div id="error">
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="email">E-Mail</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" name="email" id="email" placeholder="Email address" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="phone">Phone</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" name="phone" id="phone" placeholder="Phone number" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="password">Password</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" name="password" id="password" placeholder="Password" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="repassword">Password Again</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" name="repassword" id="repassword" placeholder="Password again"
+                        class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <button id="btn" class="btn btn-info btn-lg btn-block">Save</button>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            function validateEmail(email) {
+                var re =
+                    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
+            }
+
+            $("#btn").click(function () {
+                var errormessage = "";
+
+                email = $("#email").val();
+                phone = $("#phone").val();
+                password = $("#password").val();
+                repassword = $("#repassword").val();
+
+                error = $("#error");
+
+                if (email == "") {
+                    errormessage += "<p>Please enter an email address</p>";
+                }
+
+                else if(!validateEmail(email)) {
+                    errormessage += "<p>Please enter a valid email address</p>";
+                }
+
+                if (phone == "") {
+                    errormessage += "<p>Please enter a phone number</p>";
+                }
+
+                else if (!$.isNumeric(phone)) {
+                    errormessage += "<p>Please enter a proper phone number</p>";
+                }
+
+                if (password == "") {
+                    errormessage += "<p>Please enter a password</p>";
+                }
+
+                if (repassword == "") {
+                    errormessage += "<p>Please enter password again</p>";
+                }
+
+                if (password != repassword) {
+                    errormessage += "<p>Passwords don't match</p>";
+                }
+
+                if (errormessage != "") {
+                    error.html(errormessage);
+                } else {
+                    error.html("");
+                }
+
+            });
+        });
+    </script>
+
+</body>
+
+</html>
