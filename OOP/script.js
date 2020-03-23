@@ -43,7 +43,8 @@ console.log(omer.job);
 console.log(omer.calculateAge());
 */
 
-//**Prototype**
+/*
+**Prototype**
 
 let Person = function(name, yearOfBirth, job) {
     this.name = name;
@@ -72,3 +73,44 @@ console.log("*************")
 
 console.log(sule.getName());
 console.log(sule.calculateAge());
+*/
+
+
+function Employee(name, salary){
+
+    if(!(this instanceof Employee)){
+        return new Employee(name, salary);
+    }
+    this.name = name;
+    this.salary = salary;
+};
+
+Employee.prototype.calculateSalary = function(){
+    var month = new Date().getMonth() + 1;
+    var tax = 0;
+    var total = this.salary * month;
+
+    if(total <= 20000){
+        tax = total * 0.2;
+    }
+    else if(total > 20000 && total <= 30000){
+        tax = total * 0.25;
+    }
+    else if(total > 30000){
+        tax = total * 0.27;
+    }
+
+    return {
+        tax: tax,
+        paid: total - tax
+    }
+
+}
+
+var emp1 = Employee('Arif', 3000);
+emp1_salary = emp1.calculateSalary();
+console.log(`${emp1.name} isimli personel toplam ${emp1_salary.tax}TL vergi kesintisi ile ${emp1_salary.paid}TL maaş almıştır`);
+
+var emp2 = new Employee('Şule', 4000);
+emp2_salary = emp2.calculateSalary();
+console.log(`${emp2.name} isimli personel toplam ${emp2_salary.tax}TL vergi kesintisi ile ${emp2_salary.paid}TL maaş almıştır`);
