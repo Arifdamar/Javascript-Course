@@ -180,7 +180,7 @@ console.log(sule.calculateAge());
 console.log(sule.greeting());
 */
 
-
+/*
 //**Built-in Constructors**
 // String
 
@@ -251,6 +251,83 @@ Array.prototype.remove = Array.prototype.remove || function(member) {
 }
 
 console.log(arr1.remove('Ömer'));
+*/
+
+//** Inheritance Exercise**
+
+
+// Person Constructor
+function Person(name){
+    this.name = name;
+}
+
+Person.prototype.Introduce = function(){
+    console.log('Hello, my name is ' + this.name);
+}
+
+// Teacher Constructor
+function Teacher(name, branch){
+    Person.call(this, name);
+    this.branch = branch;
+}
+
+// Teacher Inherits from Person
+Teacher.prototype = Object.create(Person.prototype);
+Teacher.prototype.constructor = Teacher;
+Teacher.prototype.teach = function() {
+    console.log('I teach ' + this.branch);
+}
+
+// Student Constructor
+function Student(name, number) {
+    Person.call(this, name);
+    this.number = number;
+}
+
+// Student Inherits from Person
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.constructor = Student;
+Student.prototype.study = function(){
+    console.log('My student number is ' + this.number + ' and I\'ve alredy studied hard!');
+}
+
+
+// Headmaster Constructor
+function Headmaster(name, branch){
+    Teacher.call(this, name, branch);
+}
+
+// Headmaster Inherits from Teacher
+Headmaster.prototype = Object.create(Teacher.prototype);
+Headmaster.prototype.constructor = Headmaster;
+Headmaster.prototype.shareTask = function() {
+    console.log('I\'ve already shared task!');
+}
+
+
+let p1 = new Person('Arif');
+p1.Introduce(); // Person
+
+let t1 = new Teacher('Metin','Biology');
+t1.Introduce(); // Person
+t1.teach(); // Teacher
+
+let s1 = new Student('Utku', 'G171210025');
+s1.Introduce(); // Person
+s1.study(); // Student
+
+let hm1 = new Headmaster('Ömer', 'Math');
+hm1.Introduce(); // Person
+hm1.teach(); // Teacher
+hm1.shareTask(); // Headmaster
+
+
+
+
+
+
+
+
 
 
 
