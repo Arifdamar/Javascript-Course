@@ -75,7 +75,8 @@ console.log(sule.getName());
 console.log(sule.calculateAge());
 */
 
-
+/*
+**Constructor and prototype exercise**
 function Employee(name, salary){
 
     if(!(this instanceof Employee)){
@@ -114,3 +115,63 @@ console.log(`${emp1.name} isimli personel toplam ${emp1_salary.tax}TL vergi kesi
 var emp2 = new Employee('Şule', 4000);
 emp2_salary = emp2.calculateSalary();
 console.log(`${emp2.name} isimli personel toplam ${emp2_salary.tax}TL vergi kesintisi ile ${emp2_salary.paid}TL maaş almıştır`);
+*/
+
+
+// Object.create
+
+let personProto = {
+    calculateAge: function(){
+        return 2020 - this.yearOfBirth;
+    }
+}
+
+let arif = Object.create(personProto);
+arif.name = "Arif";
+arif.yearOfBirth = 1999;
+arif.job = "student";
+
+let sule = Object.create(personProto, {
+    name: {value: 'Şule'},
+    yearOfBirth: {value: 1996},
+    job: {value: 'nurse'}
+});
+
+console.log(arif);
+console.log(arif.calculateAge());
+
+console.log(sule);
+console.log(sule.calculateAge());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
