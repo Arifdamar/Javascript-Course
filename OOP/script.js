@@ -117,8 +117,8 @@ emp2_salary = emp2.calculateSalary();
 console.log(`${emp2.name} isimli personel toplam ${emp2_salary.tax}TL vergi kesintisi ile ${emp2_salary.paid}TL maaş almıştır`);
 */
 
-
-// Object.create
+/*
+**Object.create**
 
 let personProto = {
     calculateAge: function(){
@@ -142,17 +142,41 @@ console.log(arif.calculateAge());
 
 console.log(sule);
 console.log(sule.calculateAge());
+*/
+
+// Prototypal Inheritance
+
+let Person = function (name, yearOfBirth, job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+}
+
+Person.prototype.calculateAge = function() {
+    return 2020 - this.yearOfBirth;
+}
+
+let Teacher = function(name, yearOfBirth, subject, job='Teacher') {
+    Person.call(this, name, yearOfBirth, job);
+    this.subject = subject;
+}
 
 
+// Inherit the Person prototype methods
+Teacher.prototype = Object.create(Person.prototype);
 
+// Set Teacher constructor
+Teacher.prototype.constructor = Teacher;
 
+Teacher.prototype.greeting = function() {
+    return 'Hello, my name is ' + this.name;
+}
 
+let sule = new Teacher('Şule', 1996, 'Math');
 
-
-
-
-
-
+console.log(sule);
+console.log(sule.calculateAge());
+console.log(sule.greeting());
 
 
 
