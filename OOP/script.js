@@ -391,7 +391,7 @@ function filterProducts(prd) {
 filterProducts(products);
 */
 
-
+/*
 //**Callback Functions**
 
 let val;
@@ -451,11 +451,31 @@ console.log(val);
 // for(let i = 0; i <val.length; i++){
 //     val[i] = addOne(val[i]);
 // }
+*/
 
 
+//**Immediate Functions**
 
 
+// (function() {
 
+// }());
+
+// Both are the same
+
+// (function() {
+
+// })();
+
+(function(name) {
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    var today = new Date();
+
+    var msg = 'Welcome. My name is ' + name + ' and today is ' + days[today.getDay()];
+
+    console.log(msg);
+}('Arif'));
 
 
 
