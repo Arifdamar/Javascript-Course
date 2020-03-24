@@ -323,7 +323,7 @@ hm1.teach(); // Teacher
 hm1.shareTask(); // Headmaster
 */
 
-
+/*
 //**Primitive & Objects**
 
 var a = 10;
@@ -389,6 +389,77 @@ function filterProducts(prd) {
 }
 
 filterProducts(products);
+*/
+
+
+//**Callback Functions**
+
+let val;
+
+function MultipleByTwo(a,b,c,callback) {
+    let arr = [];
+
+    // if callback is not null and callback is a function
+    if (callback && typeof callback === 'function') {
+        for(let i = 0; i <3;i++){
+            arr[i] = callback(arguments[i] * 2);
+        }
+    }
+
+    return arr;
+}
+
+function addOne(a){
+    return a + 1;
+}
+
+function addTwo(a){
+    return a + 2;
+}
+
+function addThree(a){
+    return a + 3;
+}
+
+val = MultipleByTwo(2,3,4,addOne);
+console.log(val);
+
+val = MultipleByTwo(2,3,4,addTwo);
+console.log(val);
+
+val = MultipleByTwo(2,3,4,addThree);
+console.log(val);
+
+val = MultipleByTwo(2,3,4);
+console.log(val);
+
+val = MultipleByTwo(2,3,4,10);
+console.log(val);
+
+val = MultipleByTwo(2,3,4,function(a){
+    return a + 1;
+});
+console.log(val);
+
+val = MultipleByTwo(2,3,4, a => {return a+1});
+console.log(val);
+
+
+//val = addOne(5);
+//console.log(val);
+
+// for(let i = 0; i <val.length; i++){
+//     val[i] = addOne(val[i]);
+// }
+
+
+
+
+
+
+
+
+
 
 
 
