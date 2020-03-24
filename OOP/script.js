@@ -558,7 +558,7 @@ console.log(person.fullName);
 console.log(person);
 */
 
-
+/*
 //**Call, Apply & Bind
 var welcome = function(a,b){
     console.log('Welcome '+ this.name + '. Are you interested in ' + a + ' and ' + b + '?');
@@ -582,14 +582,49 @@ welcomeArif('asp.net','angularjs');
 
 welcomeOmer = welcome.bind(omer);
 welcomeOmer('asp.net','angularjs');
+*/
 
 
+//** Demo: Numeric Range **
 
+var num = {
+    min:0,
+    max:100,
+    checkNumericRange: function(value) {
+        if(typeof value !== 'number'){
+            return NaN;
+        }
+        else{
+            return value >= this.min && value <= this.max;
+        }
+    }
+}
 
+console.log(num.checkNumericRange(20));
+console.log(num.checkNumericRange(-20));
+console.log(num.checkNumericRange(110));
+console.log(num.checkNumericRange('a'));
 
+console.log('***************************');
+console.log('**call**');
 
+var num1 = {min: 50, max:120};
 
+console.log(num.checkNumericRange.call(num1,20));
+console.log(num.checkNumericRange.call(num1,110));
 
+console.log('***************************');
+console.log('**apply**');
+
+console.log(num.checkNumericRange.apply(num1,[105]));
+console.log(num.checkNumericRange.apply(num1,[40]));
+
+console.log('***************************');
+console.log('**bind**');
+
+CheckNumericRangeNum1 = num.checkNumericRange.bind(num1);
+console.log(CheckNumericRangeNum1(10));
+console.log(CheckNumericRangeNum1(115));
 
 
 
