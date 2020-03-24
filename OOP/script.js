@@ -478,7 +478,7 @@ console.log(val);
 }('Arif'));
 */
 
-
+/*
 //**Functions that return Functions**
 
 function Question(hobby){
@@ -525,6 +525,44 @@ let softwareQuestion = Question('software');
 softwareQuestion('Arif');
 softwareQuestion('Şule');
 softwareQuestion('Ömer');
+*/
+
+
+//**Getter & Setters**
+const person = {
+    firstName: 'Arif',
+    lastName: 'Damar'
+}
+
+Object.defineProperty(person,'fullName',{
+    get : function() {
+        return `${this.firstName} ${this.lastName}`;
+    },
+    set : function(value){
+        const parts = value.split(' ');
+        this.firstName = parts[0];
+        this.lastName = parts[1];
+    }
+})
+
+Object.defineProperty(person,'Age',{
+    value: 50,
+    writable: true
+})
+
+person.Age = 55;
+
+console.log(person.fullName);
+person.fullName = 'Şule Damar';
+console.log(person.fullName);
+console.log(person);
+
+
+
+
+
+
+
 
 
 
