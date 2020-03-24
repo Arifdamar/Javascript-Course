@@ -253,6 +253,7 @@ Array.prototype.remove = Array.prototype.remove || function(member) {
 console.log(arr1.remove('Ömer'));
 */
 
+/*
 //** Inheritance Exercise**
 
 
@@ -320,8 +321,74 @@ let hm1 = new Headmaster('Ömer', 'Math');
 hm1.Introduce(); // Person
 hm1.teach(); // Teacher
 hm1.shareTask(); // Headmaster
+*/
 
 
+//**Primitive & Objects**
+
+var a = 10;
+var b = a;
+a = 15;
+
+console.log(a);
+console.log(b);
+
+var obj1 = {
+    name: 'Arif',
+    age: 20
+}
+
+var obj2 = obj1;
+obj1.age = 21;
+
+console.log(obj1);
+console.log(obj2);
+
+console.log('*********************');
+
+var num = 50;
+var account = {
+    name: 'Arif',
+    accountnumber: '12345'
+}
+
+console.log(num);
+console.log(account);
+
+function update(a,b){
+    a = 100;
+    b.accountnumber = '11111';
+}
+
+update(num,account);
+
+console.log(num);
+console.log(account);
+
+
+var products = [
+    {name: 'Product name1', price: 1000},
+    {name: 'Product name2', price: 1001},
+    {name: 'Product name3', price: 1002},
+    {name: 'Product name4', price: 1003},
+    {name: 'Product name5', price: 1004},
+    {name: 'Product name6', price: 1005},
+    {name: 'Product name7', price: 1006},
+    {name: 'Product name8', price: 1007},
+    {name: 'Product name9', price: 1008},
+    {name: 'Product name10', price: 1009},
+    {name: 'Product name11', price: 1010},
+    {name: 'Product name12', price: 1011},
+    {name: 'Product name13', price: 1012},
+    {name: 'Product name14', price: 1013}
+];
+
+function filterProducts(prd) {
+// if this parameter was called by value all the datas would copied unnecessarily
+// and it would cause high memory usage
+}
+
+filterProducts(products);
 
 
 
