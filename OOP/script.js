@@ -527,7 +527,7 @@ softwareQuestion('Şule');
 softwareQuestion('Ömer');
 */
 
-
+/*
 //**Getter & Setters**
 const person = {
     firstName: 'Arif',
@@ -556,17 +556,32 @@ console.log(person.fullName);
 person.fullName = 'Şule Damar';
 console.log(person.fullName);
 console.log(person);
+*/
 
 
+//**Call, Apply & Bind
+var welcome = function(a,b){
+    console.log('Welcome '+ this.name + '. Are you interested in ' + a + ' and ' + b + '?');
+}
 
+var arif = {name: 'Arif'};
+var omer = {name: 'Ömer'};
 
+welcome.call(arif,'asp.net','angularjs');
+welcome.call(omer,'asp.net','angularjs');
 
+console.log('**************************');
 
+welcome.apply(arif,['asp.net','angularjs']);
+welcome.apply(omer,['asp.net','angularjs']);
 
+console.log('**************************');
 
+welcomeArif = welcome.bind(arif);
+welcomeArif('asp.net','angularjs');
 
-
-
+welcomeOmer = welcome.bind(omer);
+welcomeOmer('asp.net','angularjs');
 
 
 
