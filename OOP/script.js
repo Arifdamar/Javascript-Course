@@ -453,7 +453,7 @@ console.log(val);
 // }
 */
 
-
+/*
 //**Immediate Functions**
 
 
@@ -476,6 +476,58 @@ console.log(val);
 
     console.log(msg);
 }('Arif'));
+*/
+
+
+//**Functions that return Functions**
+
+function Question(hobby){
+    switch(hobby){
+        case 'cars':
+            return function(name){
+                console.log('Dear ' + name + ', do you have a car?');
+            }
+            break;
+        case 'books':
+            return function(name){
+                console.log('Dear ' + name + ', what was the last book you read?');
+            }
+            break;
+        case 'movies':
+            return function(name){
+                console.log('Dear ' + name + ', what was the last movie you watched?');
+            }
+            break;
+        case 'software':
+            return function(name){
+                console.log('Dear ' + name + ', what is your favorite programming language?');
+            }
+            break;
+        default:
+            return function(name){
+                console.log('You should have a hobby, ' + name);
+            }
+    }
+}
+
+let carQuestion = Question('cars');
+
+carQuestion('Arif');
+carQuestion('Şule');
+
+let bookQuestion = Question('books');
+
+bookQuestion('Arif');
+bookQuestion('Şule');
+
+let softwareQuestion = Question('software');
+
+softwareQuestion('Arif');
+softwareQuestion('Şule');
+softwareQuestion('Ömer');
+
+
+
 
 
 
