@@ -5,32 +5,32 @@ function Question(text, choices, answer) {
 }
 
 // Question Prototype
-Question.prototype.checkAnswer = function(answer) {
+Question.prototype.checkAnswer = function (answer) {
     return this.answer === answer;
 }
 
 // Quiz Constructor
-function Quiz(questions){
+function Quiz(questions) {
     this.questions = questions;
     this.score = 0;
     this.questionIndex = 0;
 }
 
 // Quiz Prototype
-Quiz.prototype.getQuestion = function(){
+Quiz.prototype.getQuestion = function () {
     return this.questions[this.questionIndex];
 }
 
 // Quiz isFinished
-Quiz.prototype.isFinished = function(){
+Quiz.prototype.isFinished = function () {
     return this.questions.length === this.questionIndex;
 }
 
 // Quiz Guess
-Quiz.prototype.guess = function(answer){
+Quiz.prototype.guess = function (answer) {
     var question = this.getQuestion();
 
-    if(question.checkAnswer(answer)){
+    if (question.checkAnswer(answer)) {
         this.score++;
     }
     this.questionIndex++;
@@ -38,17 +38,17 @@ Quiz.prototype.guess = function(answer){
 
 var q1 = new Question(
     "What's the best programming language?",
-    ["C#","JavaScript","Python","Java","C++"],
+    ["C#", "JavaScript", "Python", "Java", "C++"],
     "JavaScript");
 
 var q2 = new Question(
     "What's the most popular programming language?",
-    ["C#","JavaScript","Python","Java","C++"],
+    ["C#", "JavaScript", "Python", "Java", "C++"],
     "JavaScript");
 
 var q3 = new Question(
     "What's the best modern programming language?",
-    ["C#","JavaScript","Python","Java","C++"],
+    ["C#", "JavaScript", "Python", "Java", "C++"],
     "Python");
 
 var questions = [q1, q2, q3];
@@ -56,17 +56,46 @@ var questions = [q1, q2, q3];
 // Start Quiz
 var quiz = new Quiz(questions);
 
-console.log(quiz.isFinished());
+loadQuestion();
 
-console.log(quiz.getQuestion());
-quiz.guess("JavaScript");
+function loadQuestion() {
+    document.querySelector('#progress').innerHTML = "";
+    if (quiz.isFinished()) {
+        showScore();
+    } else {
+        var question = quiz.getQuestion();
+        var choices = question.choices;
+        var choiceButtons = document.querySelector('#choiceButtons');
+        choiceButtons.innerHTML = '';
 
-console.log(quiz.getQuestion());
-quiz.guess("Java");
+        document.querySelector("#question").textContent = question.text;
 
-console.log(quiz.getQuestion());
-quiz.guess("Python");
+        for (let i = 0; i < choices.length; i++) {
+            // First we need to create all the choice buttons
+            choiceButtons.innerHTML += "<button id='btn" + i + "' class='btn btn-primary mr-2'><span id='choice" + i + "'>" + choices[i] + "</span></button>";
+        }
 
-console.log(quiz.score);
+        for (let i = 0; i < choices.length; i++) {
+            // After creating all the choice buttons we can now select them
+            // and then add onclick events
+            let button = document.getElementById('btn' + i);
+            button.onclick = function () {
+                quiz.guess(choices[i]);
+                loadQuestion();
+            }
+        }
+        showProgress();
+    }
+}
 
-console.log(quiz.isFinished());
+function showScore() {
+    var html = `<h2>Score</h2><h4>${quiz.score}</h4>`;
+    document.querySelector('.card-body').innerHTML = html
+}
+
+function showProgress() {
+    var total = quiz.questions.length;
+    var questionIndex = quiz.questionIndex + 1;
+
+    document.querySelector('#progress').innerHTML = "Question " + questionIndex + "of " + total;
+}
