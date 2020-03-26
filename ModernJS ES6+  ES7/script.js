@@ -1,4 +1,4 @@
-// Arrow Functions
+/*// Arrow Functions
 // ES5
 let welcomeES5 = function () {
     console.log('Hello from ES5');
@@ -92,3 +92,59 @@ console.log(evenES5);
 // ES6
 let evenES6 = arr.filter(x => x%2== 0);
 console.log(evenES6);
+*/
+
+
+// 'this' keyword
+
+// ES5
+let listES5 = {
+    category: 'phones',
+    names: ['Apple IPhone X', 'Samsung Galaxy S9', 'Samsung Galaxy Note 10'],
+    call: function(){
+        var self = this;
+        this.names.map(function(name){
+            console.log(`${self.category} ${name}`);
+        })
+    }
+}
+
+listES5.call();
+
+console.log("*******************");
+
+// ES6
+let listES6 = {
+    category: 'phones',
+    names: ['Apple IPhone X', 'Samsung Galaxy S9', 'Samsung Galaxy Note 10'],
+    call: function(){
+        this.names.map(name => console.log(`${this.category} ${name}`))
+    }
+}
+listES6.call();
+
+
+// ES5
+function GameES5(){
+    this.live = 0;
+    this.addLive = function(){
+        var self = this;
+        this.OneUp = setInterval(function(){
+            console.log("ES5 "+ ++self.live);
+        },1000);
+    }
+}
+
+let playerES5 = new GameES5();
+playerES5.addLive();
+
+// ES6
+function GameES6(){
+    this.live = 0;
+    this.addLive = () => {
+        this.OneUp = setInterval(()=> console.log("ES6 "+ ++this.live),1000);
+    };
+}
+
+let playerES6 = new GameES6();
+playerES6.addLive();
