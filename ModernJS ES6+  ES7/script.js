@@ -150,7 +150,7 @@ let playerES6 = new GameES6();
 playerES6.addLive();
 */
 
-
+/*
 // Spread Operator
 
 function getTotal(a,b,c) {
@@ -186,3 +186,42 @@ let tags = [h1,...divs];
 tags.forEach(tag => {tag.style.color = 'red'});
 
 console.log(tags);
+*/
+
+
+// Rest Parameters
+
+// ES5
+
+function sumES5(){
+    let arr = Array.prototype.slice.call(arguments);
+
+    let result = 0;
+
+    arr.forEach(item => {
+        result += item;
+    });
+
+    return result;
+}
+
+console.log(sumES5(10,20,30));
+
+// ES6
+function sumES6(...arr) {
+    let result = 0;
+
+    arr.forEach(item => result += item);
+
+    return result;
+}
+
+console.log(sumES6(10,20,30,40));
+
+
+// ES6
+function isDriver(age,...years){
+    years.forEach(year => console.log(year + " is"+ (2020-year>=age ? " able to": " not able to")));
+}
+
+isDriver(17,2000,2005,1999,2006,1998,2004,2001,2002,2003,2007,2008);
