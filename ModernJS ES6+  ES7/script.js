@@ -314,7 +314,7 @@ const [,,wed,,fri] = days;
 console.log(wed,fri);
 */
 
-
+/*
 // Arrays in ES6
 
 const boxes = document.querySelectorAll('.box');
@@ -389,3 +389,72 @@ let value = numbers.values();
 for(let i of value){
     console.log(i);
 }
+*/
+
+
+// Maps : key/value pairs (collection)
+
+let val;
+
+const numbers = new Map();
+
+numbers.set(1,'one');
+numbers.set('2','two');
+numbers.set(3,'three');
+numbers.set('four','four');
+
+val = numbers;
+val = numbers.get(1);
+val = numbers.get('2');
+val = numbers.get('four');
+val = numbers.size;
+val = numbers.has(1);
+// numbers.delete('four');
+val = numbers.has('four');
+// numbers.clear();
+
+console.log(val);
+
+for(var [key,value] of numbers){
+    console.log(key + ': ' + value);
+}
+
+console.log('***********************');
+
+for(var [key,value] of numbers.entries()){
+    console.log(key + ': ' + value);
+}
+
+console.log('***********************');
+
+for(var key of numbers.keys()){
+    console.log(key);
+}
+
+console.log('***********************');
+
+for(var value of numbers.values()){
+    console.log(value);
+}
+
+console.log('***********************');
+
+numbers.forEach((value,key) => {
+    console.log(key + ': ' + value);
+});
+
+
+var first = new Map([
+    [1,'one'],
+    [2,'two'],
+    [3,'three']
+]);
+
+var second = new Map([
+    [4,'four'],
+    [5,'five']
+]);
+
+var merged = new Map([...first, ...second]);
+
+console.log(merged);
