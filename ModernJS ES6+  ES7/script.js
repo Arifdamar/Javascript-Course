@@ -227,7 +227,7 @@ function isDriver(age,...years){
 isDriver(17,2000,2005,1999,2006,1998,2004,2001,2002,2003,2007,2008);
 */
 
-
+/*
 // Destructuring
 
 
@@ -312,3 +312,80 @@ const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
 
 const [,,wed,,fri] = days;
 console.log(wed,fri);
+*/
+
+
+// Arrays in ES6
+
+const boxes = document.querySelectorAll('.box');
+
+// ES5
+let boxesES5 = Array.prototype.slice.call(boxes);
+
+// boxesES5.forEach( box => {
+//     box.style.backgroundColor = 'green';
+// });
+
+//ES6
+// Array.from(boxes).forEach( box => {
+//     box.style.backgroundColor = 'green';
+// })
+
+
+// ES5
+// for(let i = 0; i<boxesES5.length; i++){
+//     if(boxesES5[i].className == 'box blue'){
+//         continue;
+//     }
+//     boxesES5[i].textContent = "I'm new now!";
+//     boxesES5[i].style.backgroundColor = 'blue';
+// }
+
+// ES6
+// var boxesES6 = Array.from(boxes);
+
+// for(let box of boxesES6){
+//     if(box.className == 'box blue'){
+//         continue;
+//     }
+//     box.textContent = "I'm new now!";
+//     box.style.backgroundColor = 'blue';
+// }
+
+
+// from
+// let arr = Array.from('Modern JavaScript');
+
+// console.log(arr);
+
+const products = [
+    {name: 'Samsung Galaxy S10', price: 8000},
+    {name: 'Samsung Galaxy S9', price: 7000},
+    {name: 'Samsung Galaxy S8', price: 6000},
+    {name: 'Samsung Galaxy S9+', price: 7500}
+];
+
+console.log(Array.from(products,prd => 
+    prd.name == 'Samsung Galaxy S9'));
+console.log(products.filter(prd => prd.price>6999));
+console.log(products.findIndex(prd => prd.price==6000));
+
+let numbers = ['a','b','c','d'];
+
+let entries = numbers.entries();
+
+for(let i of entries){
+    console.log(i);
+}
+
+let keys = numbers.keys();
+
+for(let i of keys){
+    console.log(i);
+}
+
+let value = numbers.values();
+
+for(let i of value){
+    console.log(i);
+}
