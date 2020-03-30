@@ -538,7 +538,7 @@ var difference = new Set([...mySet].filter(x => !mySet2.has(x)));
 console.log(difference);
 */
 
-
+/*
 // Classes
 
 // ES5
@@ -574,3 +574,46 @@ let arifES6 = new PersonES6('Arif', 'Student', 1999);
 
 console.log(arifES6.calculateAge());
 console.log(arifES6);
+*/
+
+
+// Static methods
+
+// class PersonES6{
+//     constructor(name, age, yearOfBirth){
+//         this.name = name;
+//         this.age = age;
+//         this.yearOfBirth = yearOfBirth;
+//     }
+
+//     calculateAge() {
+//         return 2020 - this.yearOfBirth;
+//     }
+
+//     static sayHi() {
+//         console.log('Hello there!');
+//     }
+// }
+
+// let arif = new PersonES6('arif', 1999, 'student');
+// console.log(arif);
+
+// PersonES6.sayHi();
+
+class Point{
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    static distance(point1, point2) {
+        const dx = point1.x - point2.x;
+        const dy = point1.y - point2.y;
+        return Math.hypot(dx, dy);
+    }
+}
+
+const d1 = new Point(10,10);
+const d2 = new Point(20,20);
+
+console.log(Point.distance(d1, d2));
