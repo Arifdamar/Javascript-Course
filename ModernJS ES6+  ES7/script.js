@@ -576,7 +576,7 @@ console.log(arifES6.calculateAge());
 console.log(arifES6);
 */
 
-
+/*
 // Static methods
 
 // class PersonES6{
@@ -617,3 +617,62 @@ const d1 = new Point(10,10);
 const d2 = new Point(20,20);
 
 console.log(Point.distance(d1, d2));
+*/
+
+
+// Inheritance
+
+// ES5
+
+function PersonES5(firstName, lastName){
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+PersonES5.prototype.sayHi = function(){
+    return `Hello I'm ${this.firstName} ${this.lastName}`;
+}
+
+function CustomerES5(firstName, lastName, phone, username){
+    PersonES5.call(this, firstName, lastName);
+    this.phone = phone;
+    this.username = username;
+}
+
+CustomerES5.prototype = Object.create(PersonES5.prototype);
+CustomerES5.prototype.constructor = CustomerES5;
+
+let customerES5 = new CustomerES5('Arif', 'Damar', '1111111111', 'arifdamar');
+console.log(customerES5.sayHi());
+console.log(customerES5);
+
+console.log('*********************');
+// ES6
+
+class PersonES6{
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    sayHi() {
+        return `Hello I'm ${this.firstName} ${this.lastName}`;
+    }
+}
+
+class CustomerES6 extends PersonES6 {
+    constructor(firstName, lastName, phone, username) {
+        super(firstName, lastName);
+        this.phone = phone;
+        this.username = username;
+    }
+
+    static getTotal(){
+        return 1000;
+    }
+}
+
+let customerES6 = new CustomerES6('Şule','Damar', '2222222222', 'suledamar');
+console.log(customerES6.sayHi());
+console.log(customerES6);
+console.log(CustomerES6.getTotal());
