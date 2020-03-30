@@ -460,7 +460,7 @@ var merged = new Map([...first, ...second]);
 console.log(merged);
 */
 
-
+/*
 // Sets (Collection - Unique value)
 
 let val;
@@ -536,3 +536,41 @@ console.log(intersect);
 var difference = new Set([...mySet].filter(x => !mySet2.has(x)));
 
 console.log(difference);
+*/
+
+
+// Classes
+
+// ES5
+var PersonES5 = function(name, job, yearOfBirth){
+    this.name = name;
+    this.job = job;
+    this.yearOfBirth = yearOfBirth;
+}
+
+PersonES5.prototype.calculateAge = function() {
+    return 2020 - this.yearOfBirth;
+}
+
+var arifES5 = new PersonES5('Arif', 'Student', 1999);
+
+console.log(arifES5.calculateAge());
+console.log(arifES5);
+
+// ES6
+class PersonES6{
+    constructor(name, age, yearOfBirth){
+        this.name = name;
+        this.age = age;
+        this.yearOfBirth = yearOfBirth;
+    }
+
+    calculateAge() {
+        return 2020 - this.yearOfBirth;
+    }
+}
+
+let arifES6 = new PersonES6('Arif', 'Student', 1999);
+
+console.log(arifES6.calculateAge());
+console.log(arifES6);
