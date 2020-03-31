@@ -37,6 +37,22 @@ UI.prototype.deleteCourse = function(element) {
     };
 }
 
+UI.prototype.showAlert = function(message,alertType) {
+    var alert = `
+        <div class="alert alert-${alertType}">
+            ${message}
+        </div>
+    `;
+
+    const row = document.querySelector('.row');
+    // beforeBegin, afterBegin, beforeEnd, afterEnd
+    row.insertAdjacentHTML('beforeBegin',alert);
+
+    setTimeout(function() {
+        document.querySelector('.alert').remove();
+    },5000);
+}
+
 document.getElementById('new-course').addEventListener('submit',
 function(e) {
 
@@ -50,16 +66,25 @@ function(e) {
     // Create UI
     const ui = new UI();
 
-    // add course to list
-    ui.addCourseToList(course);
+    if(title === '' || instructor === '' || image === ''){
+        ui.showAlert('Please fill the fields!','warning');
+    }
+    else{
+        // add course to list
+        ui.addCourseToList(course);
 
-    // clear controls
-    ui.clearControls();
+        // clear controls
+        ui.clearControls();
 
+        ui.showAlert('The course has been added successfully!','success');
+    }
+
+    
     e.preventDefault();
 });
 
 document.getElementById('course-list').addEventListener('click', function(e) {
     const ui = new UI();
     ui.deleteCourse(e.target);
+    ui.showAlert('The course has been deleted!','danger');
 });
