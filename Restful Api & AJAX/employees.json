@@ -1,9 +1,25 @@
-{
-    "employees": [
-        {"firstname": "Arif", "lastname": "Damar", "age": 20, "retired": false},
-        {"firstname": "Şule", "lastname": "Damar", "age": 23, "retired": false},
-        {"firstname": "Ömer Çağrı", "lastname": "Şayir", "age": 20, "retired": false},
-        {"firstname": "Arif Yusuf", "lastname": "Yılmaz", "age": 21, "retired": false},
-        {"firstname": "Emin Utku", "lastname": "Mert", "age": 20, "retired": false}
-    ]
-}
+[{
+        "firstName": "Arif",
+        "lastName": "Damar",
+        "age": 20,
+        "retired": false
+    },
+    {
+        "firstName": "Şule",
+        "lastName": "Damar",
+        "age": 24,
+        "retired": false
+    },
+    {
+        "firstName": "Firdevs",
+        "lastName": "Damar",
+        "age": 47,
+        "retired": true
+    },
+    {
+        "firstName": "Celil",
+        "lastName": "Damar",
+        "age": 50,
+        "retired": false
+    }
+]
