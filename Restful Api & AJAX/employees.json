@@ -1,0 +1,9 @@
+{
+    "employees": [
+        {"firstname": "Arif", "lastname": "Damar", "age": 20, "retired": false},
+        {"firstname": "Şule", "lastname": "Damar", "age": 23, "retired": false},
+        {"firstname": "Ömer Çağrı", "lastname": "Şayir", "age": 20, "retired": false},
+        {"firstname": "Arif Yusuf", "lastname": "Yılmaz", "age": 21, "retired": false},
+        {"firstname": "Emin Utku", "lastname": "Mert", "age": 20, "retired": false}
+    ]
+}
