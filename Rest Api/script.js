@@ -1,3 +1,5 @@
+/*
+// **HTTP GET and POST**
 document.querySelector('#getOne').addEventListener('click', getOne);
 document.querySelector('#getAll').addEventListener('click', getAll);
 document.querySelector('#postData').addEventListener('click', postData);
@@ -89,3 +91,57 @@ function postData() {
     xhr.send(json);
     
 }
+*/
+
+
+// **Asynchronous programming with callback functions**
+let products = [{
+        id: 1,
+        name: 'Samsung Galaxy S9',
+        price: 8000
+    },
+    {
+        id: 2,
+        name: 'Samsung Galaxy S8',
+        price: 7000
+    },
+    {
+        id: 3,
+        name: 'Samsung Galaxy S7',
+        price: 6000
+    }
+];
+
+let added = false;
+
+function addProduct(prd, callback) {
+    if (added) {
+        setTimeout(() => {
+            products.push(prd);
+
+            callback(null,prd);
+        }, 2000);
+    } else {
+        callback('500',prd);
+    }
+}
+
+function getProduct() {
+    setTimeout(() => {
+        products.forEach(p => {
+            console.log(p.name);
+        })
+    }, 1000);
+}
+
+addProduct({
+    id: 4,
+    name: 'Samsung Galaxy S10',
+    price: 9000
+}, function (err, data) {
+    if (err) {
+        console.log('Error: ' + err);
+    } else {
+        console.log(data);
+    }
+});
