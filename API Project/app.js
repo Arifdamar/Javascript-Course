@@ -10,12 +10,13 @@ searchProfile.addEventListener('keyup', event => {
     if(text !== '') {
         profile.getProfile(text)
         .then(response => {
-            if(response.profile.length === 0) {
-                ui.showAlert(text);
-            }
-            else {
+            if(!(response.profile.length === 0)) {
                 ui.showProfile(response.profile[0]);
+                ui.showTodo(response.todo);
             }
         })
+        .catch(error => {
+            ui.showAlert(text);
+        });
     }
 })
