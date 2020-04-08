@@ -17,10 +17,21 @@ const ProductController = (function () {
     }
 
     const data = {
-        products: [
-            {id:0, name:'Monitor', price:100},
-            {id:1, name:'RAM', price:40},
-            {id:2, name:'Keyboard', price:90}
+        products: [{
+                id: 0,
+                name: 'Monitor',
+                price: 100
+            },
+            {
+                id: 1,
+                name: 'RAM',
+                price: 40
+            },
+            {
+                id: 2,
+                name: 'Keyboard',
+                price: 90
+            }
         ],
         selectedProduct: null,
         totalPrice: 0
@@ -28,10 +39,10 @@ const ProductController = (function () {
 
     // public
     return {
-        getProducts: function (){
+        getProducts: function () {
             return data.products;
         },
-        getData: function (){
+        getData: function () {
             return data;
         }
     }
@@ -42,6 +53,35 @@ const ProductController = (function () {
 
 const UIController = (function () {
 
+    const Selectors = {
+        productList: '#item-list'
+    }
+
+    return {
+        createProductList: function (products) {
+            let html = '';
+
+            products.forEach(product => {
+                html += `
+                <tr>
+                    <td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>${product.price}$</td>
+                    <td class="text-right">
+                        <button type="submit" class="btn btn-warning btn-sm">
+                            <i class="far fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+                `;
+            });
+
+            document.querySelector(Selectors.productList).innerHTML = html;
+        },
+        getSelectors: function() {
+            return Selectors;
+        }
+    }
 
 })();
 
@@ -50,11 +90,11 @@ const UIController = (function () {
 const App = (function (ProductCtrl, UICtrl) {
 
     return {
-        init: function (){
+        init: function () {
             console.log('Starting app...');
             const products = ProductCtrl.getProducts();
 
-
+            UICtrl.createProductList(products);
         }
     }
 
