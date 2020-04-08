@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://kit.fontawesome.com/8556d1cc97.js" crossorigin="anonymous"></script>
+    <title>OEM Calculator</title>
+</head>
+
+<body>
+    <div class="navbar navbar-dark bg-danger">
+        <div class="container">
+            <a href="" class="navbar-brand">
+                OEM Calculator
+            </a>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" id="nmae" placeholder="Product Name">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" id="price" placeholder="Price">
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-plus"></i>
+                        Add
+                    </button>
+
+                    <button type="submit" class="btn btn-warning btn-sm">
+                        <i class="far fa-edit"></i>
+                        Save Changes
+                    </button>
+
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <i class="fas fa-times"></i>
+                        Delete
+                    </button>
+
+                    <button type="submit" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-arrow-circle-left"></i>
+                        Cancel
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <table class="table">
+                <tbody id="item-list">
+                    <tr>
+                        <td>1</td>
+                        <td>Monitor</td>
+                        <td>100$</td>
+                        <td class="text-right">
+                            <button type="submit" class="btn btn-warning btn-sm">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Monitor</td>
+                        <td>100$</td>
+                        <td class="text-right">
+                            <button type="submit" class="btn btn-warning btn-sm">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Monitor</td>
+                        <td>100$</td>
+                        <td class="text-right">
+                            <button type="submit" class="btn btn-warning btn-sm">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-footer text-right">
+                <p>Total (TL) <strong>680TL</strong></p>
+                <p>Total ($) <strong>100$</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="app.js"></script>
+</body>
+
+</html>
