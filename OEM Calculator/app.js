@@ -43,6 +43,14 @@ const ProductController = (function () {
             data.products.push(newProduct);
             return newProduct;
 
+        },
+        getTotal: function(){
+            data.totalPrice = 0;
+
+            data.products.forEach(product => {
+                data.totalPrice += product.price;
+            });
+            return data.totalPrice;
         }
     }
 
@@ -57,7 +65,9 @@ const UIController = (function () {
         addButton: '#addBtn',
         productName: '#productName',
         productPrice: '#productPrice',
-        productCard : '#productCard'
+        productCard : '#productCard',
+        totalTL: '#total-tl',
+        totalDollar: '#total-dollar'
     };
 
     const addToHtml = product => {
@@ -95,12 +105,16 @@ const UIController = (function () {
             
             document.querySelector(Selectors.productList).innerHTML += newProduct;
         },
-        clearInputs(){
+        clearInputs: function(){
             document.querySelector(Selectors.productName).value = '';
             document.querySelector(Selectors.productPrice).value = '';
         },
         hideCard: function(){
             document.querySelector(Selectors.productCard).style.display = 'none';
+        },
+        showTotal: function(total){
+            document.querySelector(Selectors.totalDollar).textContent = total;
+            document.querySelector(Selectors.totalTL).textContent = total * 6.7;
         }
     }
 
@@ -124,13 +138,20 @@ const App = (function (ProductCtrl, UICtrl) {
         const productName = document.querySelector(UISelectors.productName).value;
         const productPrice = document.querySelector(UISelectors.productPrice).value;
 
-        if (productName !== '' || productPrice !== '') {
+        if (productName !== '' && productPrice !== '') {
             // Add Product
             const newProduct = ProductCtrl.addProduct(productName, productPrice);
 
             // Add item to list
             UICtrl.addProductToList(newProduct);
 
+            // Get Total
+            const total = ProductCtrl.getTotal();
+
+            // Show Total
+            UICtrl.showTotal(total);
+
+            // clear Inputs
             UICtrl.clearInputs();
         }
 
