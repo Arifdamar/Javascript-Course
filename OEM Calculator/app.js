@@ -62,6 +62,13 @@ const ProductController = (function () {
             });
 
             return product;
+        },
+        getCurrentProduct: function(){
+            return data.selectedProduct;
+        }
+        ,
+        setCurrentProduct: function(product){
+            data.selectedProduct = product;
         }
     }
 
@@ -69,7 +76,7 @@ const ProductController = (function () {
 
 // UI Controller
 
-const UIController = (function () {
+const UIController = (function (ProductCtrl) {
 
     const Selectors = {
         productList: '#item-list',
@@ -124,10 +131,16 @@ const UIController = (function () {
         showTotal: function(total){
             document.querySelector(Selectors.totalDollar).textContent = total;
             document.querySelector(Selectors.totalTL).textContent = total * 6.7;
+        },
+        addProductToForm: function(){
+            const selectedProduct = ProductCtrl.getCurrentProduct();
+
+            document.querySelector(Selectors.productName).value = selectedProduct.name;
+            document.querySelector(Selectors.productPrice).value = selectedProduct.price;
         }
     }
 
-})();
+})(ProductController);
 
 // App Controller
 
@@ -175,8 +188,14 @@ const App = (function (ProductCtrl, UICtrl) {
         if(e.target.classList.contains("edit-product")){
             const id = e.target.getAttribute("data-id");
 
+            // get selectedProduct
             const product = ProductCtrl.getProductById(id);
-            console.log(product);
+            
+            // set current product
+            ProductCtrl.setCurrentProduct(product);
+
+            //add product to UI
+            UICtrl.addProductToForm();
         }
 
 
