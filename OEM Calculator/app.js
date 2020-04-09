@@ -17,22 +17,7 @@ const ProductController = (function () {
     }
 
     const data = {
-        products: [{
-                id: 0,
-                name: 'Monitor',
-                price: 100
-            },
-            {
-                id: 1,
-                name: 'RAM',
-                price: 40
-            },
-            {
-                id: 2,
-                name: 'Keyboard',
-                price: 90
-            }
-        ],
+        products: [],
         selectedProduct: null,
         totalPrice: 0
     }
@@ -44,6 +29,20 @@ const ProductController = (function () {
         },
         getData: function () {
             return data;
+        },
+        addProduct: function (name, price) {
+            let id;
+
+            if (data.products.length > 0) {
+                id = data.products[data.products.length - 1].id + 1;
+            } else {
+                id = 0;
+            }
+
+            const newProduct = new Product(id, name, parseFloat(price));
+            data.products.push(newProduct);
+            return newProduct;
+
         }
     }
 
@@ -54,7 +53,26 @@ const ProductController = (function () {
 const UIController = (function () {
 
     const Selectors = {
-        productList: '#item-list'
+        productList: '#item-list',
+        addButton: '#addBtn',
+        productName: '#productName',
+        productPrice: '#productPrice',
+        productCard : '#productCard'
+    };
+
+    const addToHtml = product => {
+        return `
+        <tr>
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>${product.price}$</td>
+            <td class="text-right">
+                <button type="submit" class="btn btn-warning btn-sm">
+                    <i class="far fa-edit"></i>
+                </button>
+            </td>
+        </tr>
+        `;
     }
 
     return {
@@ -62,24 +80,27 @@ const UIController = (function () {
             let html = '';
 
             products.forEach(product => {
-                html += `
-                <tr>
-                    <td>${product.id}</td>
-                    <td>${product.name}</td>
-                    <td>${product.price}$</td>
-                    <td class="text-right">
-                        <button type="submit" class="btn btn-warning btn-sm">
-                            <i class="far fa-edit"></i>
-                        </button>
-                    </td>
-                </tr>
-                `;
+                html += addToHtml(product);
             });
 
             document.querySelector(Selectors.productList).innerHTML = html;
         },
-        getSelectors: function() {
+        getSelectors: function () {
             return Selectors;
+        },
+        addProductToList: function (product) {
+            document.querySelector(Selectors.productCard).style.display = 'block';
+
+            let newProduct = addToHtml(product);
+            
+            document.querySelector(Selectors.productList).innerHTML += newProduct;
+        },
+        clearInputs(){
+            document.querySelector(Selectors.productName).value = '';
+            document.querySelector(Selectors.productPrice).value = '';
+        },
+        hideCard: function(){
+            document.querySelector(Selectors.productCard).style.display = 'none';
         }
     }
 
@@ -89,12 +110,48 @@ const UIController = (function () {
 
 const App = (function (ProductCtrl, UICtrl) {
 
+    const UISelectors = UICtrl.getSelectors();
+
+    // Load Event Listeners
+    const loadEventListeners = function () {
+
+        // add product event
+        document.querySelector(UISelectors.addButton).addEventListener('click', productAddSubmit);
+    }
+
+    const productAddSubmit = function (e) {
+
+        const productName = document.querySelector(UISelectors.productName).value;
+        const productPrice = document.querySelector(UISelectors.productPrice).value;
+
+        if (productName !== '' || productPrice !== '') {
+            // Add Product
+            const newProduct = ProductCtrl.addProduct(productName, productPrice);
+
+            // Add item to list
+            UICtrl.addProductToList(newProduct);
+
+            UICtrl.clearInputs();
+        }
+
+        e.preventDefault();
+    }
+
     return {
         init: function () {
             console.log('Starting app...');
             const products = ProductCtrl.getProducts();
 
-            UICtrl.createProductList(products);
+            if(products.length === 0) {
+                UICtrl.hideCard();
+            }
+            else{
+                UICtrl.createProductList(products);
+            }
+
+
+            loadEventListeners();
+
         }
     }
 
