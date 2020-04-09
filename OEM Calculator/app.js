@@ -51,6 +51,17 @@ const ProductController = (function () {
                 data.totalPrice += product.price;
             });
             return data.totalPrice;
+        },
+        getProductById: function(id){
+            let product = null;
+
+            data.products.forEach(prd => {
+                if(prd.id == id){
+                    product = prd;
+                }
+            });
+
+            return product;
         }
     }
 
@@ -73,13 +84,11 @@ const UIController = (function () {
     const addToHtml = product => {
         return `
         <tr>
-            <td>${product.id}</td>
+            <td>${product.id+1}</td>
             <td>${product.name}</td>
             <td>${product.price}$</td>
             <td class="text-right">
-                <button type="submit" class="btn btn-warning btn-sm">
-                    <i class="far fa-edit"></i>
-                </button>
+                    <i data-id="${product.id}" class="far fa-edit edit-product"></i>
             </td>
         </tr>
         `;
@@ -131,6 +140,9 @@ const App = (function (ProductCtrl, UICtrl) {
 
         // add product event
         document.querySelector(UISelectors.addButton).addEventListener('click', productAddSubmit);
+
+        // edit product
+        document.querySelector(UISelectors.productList).addEventListener('click', productEditSubmit);
     }
 
     const productAddSubmit = function (e) {
@@ -154,6 +166,19 @@ const App = (function (ProductCtrl, UICtrl) {
             // clear Inputs
             UICtrl.clearInputs();
         }
+
+        e.preventDefault();
+    }
+
+    const productEditSubmit = (e) => {
+
+        if(e.target.classList.contains("edit-product")){
+            const id = e.target.getAttribute("data-id");
+
+            const product = ProductCtrl.getProductById(id);
+            console.log(product);
+        }
+
 
         e.preventDefault();
     }
