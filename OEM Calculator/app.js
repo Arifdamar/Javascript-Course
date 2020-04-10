@@ -81,6 +81,9 @@ const UIController = (function (ProductCtrl) {
     const Selectors = {
         productList: '#item-list',
         addButton: '#addBtn',
+        updateButton: '#updateBtn',
+        deleteButton: '#deleteBtn',
+        cancelButton: '#cancelBtn',
         productName: '#productName',
         productPrice: '#productPrice',
         productCard : '#productCard',
@@ -137,6 +140,28 @@ const UIController = (function (ProductCtrl) {
 
             document.querySelector(Selectors.productName).value = selectedProduct.name;
             document.querySelector(Selectors.productPrice).value = selectedProduct.price;
+        },
+        addingState: function(){
+            UIController.clearInputs();
+            document.querySelector(Selectors.addButton).style.display = 'inline';
+            document.querySelector(Selectors.updateButton).style.display = 'none';
+            document.querySelector(Selectors.deleteButton).style.display = 'none';
+            document.querySelector(Selectors.cancelButton).style.display = 'none';
+        },
+        editState: function(selected){
+
+            const parent = selected.parentNode;
+            console.log(parent.children);
+
+            for(let i = 0; i < parent.children.length; i++){
+                parent.children[i].classList.remove('bg-info');
+            }
+
+            selected.classList.add('bg-info');
+            document.querySelector(Selectors.addButton).style.display = 'none';
+            document.querySelector(Selectors.updateButton).style.display = 'inline';
+            document.querySelector(Selectors.deleteButton).style.display = 'inline';
+            document.querySelector(Selectors.cancelButton).style.display = 'inline';
         }
     }
 
@@ -194,8 +219,10 @@ const App = (function (ProductCtrl, UICtrl) {
             // set current product
             ProductCtrl.setCurrentProduct(product);
 
-            //add product to UI
+            // add product to UI
             UICtrl.addProductToForm();
+
+            UICtrl.editState(e.target.parentNode.parentNode);
         }
 
 
@@ -205,6 +232,9 @@ const App = (function (ProductCtrl, UICtrl) {
     return {
         init: function () {
             console.log('Starting app...');
+
+            UICtrl.addingState();
+
             const products = ProductCtrl.getProducts();
 
             if(products.length === 0) {
