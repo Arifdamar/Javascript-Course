@@ -1,12 +1,37 @@
 // Storage Controller
-
 const StorageController = (function () {
 
+
+    return {
+        storeProduct: function (product) {
+
+            let products;
+
+            if(localStorage.getItem('products') === null){
+                products = [];
+                products.push(product);
+            }
+            else {
+                products = JSON.parse(localStorage.getItem('products'));
+                products.push(product);
+            }
+            localStorage.setItem('products', JSON.stringify(products));
+        },
+        getProducts: function (){
+            let products;
+            if(localStorage.getItem('products') === null){
+                products = [];
+            }
+            else {
+                products = JSON.parse(localStorage.getItem('products'));
+            }
+            return products;
+        }
+    }
 
 })();
 
 // Product Controller
-
 const ProductController = (function () {
 
     // private
@@ -26,6 +51,9 @@ const ProductController = (function () {
     return {
         getProducts: function () {
             return data.products;
+        },
+        setProducts: function (products) {
+            data.products = products;
         },
         getData: function () {
             return data;
@@ -58,6 +86,13 @@ const ProductController = (function () {
 
             return product;
         },
+        deleteProduct: function (product){
+            data.products.forEach((prd,index) => {
+                if (prd.id == product.id){
+                    data.products.splice(index, 1);
+                }
+            });
+        },
         getTotal: function () {
             data.totalPrice = 0;
 
@@ -88,7 +123,6 @@ const ProductController = (function () {
 })();
 
 // UI Controller
-
 const UIController = (function () {
 
     const Selectors = {
@@ -179,6 +213,16 @@ const UIController = (function () {
             document.querySelector(Selectors.productName).value = selectedProduct.name;
             document.querySelector(Selectors.productPrice).value = selectedProduct.price;
         },
+        deleteProduct: function (productToDelete) {
+
+            let items = document.querySelectorAll(Selectors.productListItems);
+
+            items.forEach((item) => {
+                if(item.getAttribute('data-id') == productToDelete.id){
+                    item.remove(); 
+                }
+            });
+        },
         addingState: function () {
             UIController.clearBG();
 
@@ -205,7 +249,7 @@ const UIController = (function () {
 
 // App Controller
 
-const App = (function (ProductCtrl, UICtrl) {
+const App = (function (ProductCtrl, UICtrl, StorageCtrl) {
 
     const UISelectors = UICtrl.getSelectors();
 
@@ -223,6 +267,9 @@ const App = (function (ProductCtrl, UICtrl) {
         
         // cancel button click
         document.querySelector(UISelectors.cancelButton).addEventListener('click', cancelUpdate);
+
+        // delete product click
+        document.querySelector(UISelectors.deleteButton).addEventListener('click', deleteProductClick);
     }
 
     const showPrice = () => {
@@ -244,6 +291,9 @@ const App = (function (ProductCtrl, UICtrl) {
 
             // Add item to list
             UICtrl.addProductToList(newProduct);
+
+            // add product to local storage
+            StorageCtrl.storeProduct(newProduct);
 
             // Show price
             showPrice();
@@ -306,12 +356,41 @@ const App = (function (ProductCtrl, UICtrl) {
         e.preventDefault();
     }
 
+    const deleteProductClick = (e) => {
+     
+        // get selected product
+        const selectedProduct = ProductCtrl.getCurrentProduct();
+
+        // delete product
+        ProductCtrl.deleteProduct(selectedProduct);
+
+        // delete from UI
+        UICtrl.deleteProduct(selectedProduct);
+
+        // show price
+        showPrice();
+        
+        UICtrl.addingState();
+
+        if(ProductCtrl.getProducts().length == 0){
+            UICtrl.hideCard();
+        }
+        
+        e.preventDefault();
+    }
+
     return {
         init: function () {
             console.log('Starting app...');
-
             UICtrl.addingState();
 
+            // Get products from local storage
+            const LSProducts = StorageCtrl.getProducts();
+
+            // Set local storage products to ProductController
+            ProductCtrl.setProducts(LSProducts);
+
+            // Get products from ProductController
             const products = ProductCtrl.getProducts();
 
             if (products.length === 0) {
@@ -326,6 +405,6 @@ const App = (function (ProductCtrl, UICtrl) {
         }
     }
 
-})(ProductController, UIController);
+})(ProductController, UIController, StorageController);
 
 App.init();
