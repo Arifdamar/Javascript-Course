@@ -158,6 +158,15 @@ const UIController = (function () {
             document.querySelector(Selectors.productName).value = '';
             document.querySelector(Selectors.productPrice).value = '';
         },
+        clearBG: function (){
+            let items = document.querySelectorAll(Selectors.productListItems);
+
+            items.forEach(item => {
+                if(item.classList.contains('bg-info')){
+                    item.classList.remove('bg-info');
+                }
+            });
+        },
         hideCard: function () {
             document.querySelector(Selectors.productCard).style.display = 'none';
         },
@@ -170,13 +179,11 @@ const UIController = (function () {
             document.querySelector(Selectors.productName).value = selectedProduct.name;
             document.querySelector(Selectors.productPrice).value = selectedProduct.price;
         },
-        addingState: function (item) {
-
-            if(item){
-                item.classList.remove('bg-info');
-            }
+        addingState: function () {
+            UIController.clearBG();
 
             UIController.clearInputs();
+
             document.querySelector(Selectors.addButton).style.display = 'inline';
             document.querySelector(Selectors.updateButton).style.display = 'none';
             document.querySelector(Selectors.deleteButton).style.display = 'none';
@@ -184,11 +191,7 @@ const UIController = (function () {
         },
         editState: function (selected) {
 
-            const parent = selected.parentNode;
-
-            for (let i = 0; i < parent.children.length; i++) {
-                parent.children[i].classList.remove('bg-info');
-            }
+            UIController.clearBG();
 
             selected.classList.add('bg-info');
             document.querySelector(Selectors.addButton).style.display = 'none';
@@ -212,11 +215,14 @@ const App = (function (ProductCtrl, UICtrl) {
         // add product event
         document.querySelector(UISelectors.addButton).addEventListener('click', productAddSubmit);
 
-        // click edit product
+        // edit product click
         document.querySelector(UISelectors.productList).addEventListener('click', productEditClick);
 
-        // submit edit product
+        // edit product submit
         document.querySelector(UISelectors.updateButton).addEventListener('click', productEditSubmit);
+        
+        // cancel button click
+        document.querySelector(UISelectors.cancelButton).addEventListener('click', cancelUpdate);
     }
 
     const showPrice = () => {
@@ -227,7 +233,7 @@ const App = (function (ProductCtrl, UICtrl) {
             UICtrl.showTotal(total);
     }
 
-    const productAddSubmit = function (e) {
+    const productAddSubmit = (e) => {
 
         const productName = document.querySelector(UISelectors.productName).value;
         const productPrice = document.querySelector(UISelectors.productPrice).value;
@@ -286,9 +292,17 @@ const App = (function (ProductCtrl, UICtrl) {
             // Show price
             showPrice();
 
-            UICtrl.addingState(item);
+            UICtrl.addingState();
         }
 
+        e.preventDefault();
+    }
+
+    const cancelUpdate = (e) => {
+
+        UICtrl.addingState();
+        UICtrl.clearBG();
+        
         e.preventDefault();
     }
 
