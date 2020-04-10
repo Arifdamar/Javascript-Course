@@ -7,25 +7,43 @@ const StorageController = (function () {
 
             let products;
 
-            if(localStorage.getItem('products') === null){
+            if (localStorage.getItem('products') === null) {
                 products = [];
                 products.push(product);
-            }
-            else {
+            } else {
                 products = JSON.parse(localStorage.getItem('products'));
                 products.push(product);
             }
             localStorage.setItem('products', JSON.stringify(products));
         },
-        getProducts: function (){
+        getProducts: function () {
             let products;
-            if(localStorage.getItem('products') === null){
+            if (localStorage.getItem('products') === null) {
                 products = [];
-            }
-            else {
+            } else {
                 products = JSON.parse(localStorage.getItem('products'));
             }
             return products;
+        },
+        updateProduct: function (updatedProduct) {
+            let products = JSON.parse(localStorage.getItem('products'));
+
+            products.forEach((prd,index) => {
+                if(updatedProduct.id === prd.id){
+                    products.splice(index, 1, updatedProduct);
+                }
+            });
+            localStorage.setItem('products', JSON.stringify(products));
+        },
+        deleteProduct: function(id){
+            let products = JSON.parse(localStorage.getItem('products'));
+
+            products.forEach((prd,index) => {
+                if(id === prd.id){
+                    products.splice(index, 1);
+                }
+            });
+            localStorage.setItem('products', JSON.stringify(products));
         }
     }
 
@@ -86,9 +104,9 @@ const ProductController = (function () {
 
             return product;
         },
-        deleteProduct: function (product){
-            data.products.forEach((prd,index) => {
-                if (prd.id == product.id){
+        deleteProduct: function (product) {
+            data.products.forEach((prd, index) => {
+                if (prd.id == product.id) {
                     data.products.splice(index, 1);
                 }
             });
@@ -172,13 +190,13 @@ const UIController = (function () {
 
             document.querySelector(Selectors.productList).innerHTML += newProduct;
         },
-        updateProduct: function(updatedPrd) {
+        updateProduct: function (updatedPrd) {
             let updatedItem = null;
 
             let items = document.querySelectorAll(Selectors.productListItems);
 
             items.forEach((item) => {
-                if(item.getAttribute('data-id') == updatedPrd.id){
+                if (item.getAttribute('data-id') == updatedPrd.id) {
                     item.children[1].textContent = updatedPrd.name;
                     item.children[2].textContent = updatedPrd.price + '$';
                     updatedItem = item;
@@ -192,11 +210,11 @@ const UIController = (function () {
             document.querySelector(Selectors.productName).value = '';
             document.querySelector(Selectors.productPrice).value = '';
         },
-        clearBG: function (){
+        clearBG: function () {
             let items = document.querySelectorAll(Selectors.productListItems);
 
             items.forEach(item => {
-                if(item.classList.contains('bg-info')){
+                if (item.classList.contains('bg-info')) {
                     item.classList.remove('bg-info');
                 }
             });
@@ -218,8 +236,8 @@ const UIController = (function () {
             let items = document.querySelectorAll(Selectors.productListItems);
 
             items.forEach((item) => {
-                if(item.getAttribute('data-id') == productToDelete.id){
-                    item.remove(); 
+                if (item.getAttribute('data-id') == productToDelete.id) {
+                    item.remove();
                 }
             });
         },
@@ -264,7 +282,7 @@ const App = (function (ProductCtrl, UICtrl, StorageCtrl) {
 
         // edit product submit
         document.querySelector(UISelectors.updateButton).addEventListener('click', productEditSubmit);
-        
+
         // cancel button click
         document.querySelector(UISelectors.cancelButton).addEventListener('click', cancelUpdate);
 
@@ -273,11 +291,11 @@ const App = (function (ProductCtrl, UICtrl, StorageCtrl) {
     }
 
     const showPrice = () => {
-            // Get Total
-            const total = ProductCtrl.getTotal();
+        // Get Total
+        const total = ProductCtrl.getTotal();
 
-            // Show Total
-            UICtrl.showTotal(total);
+        // Show Total
+        UICtrl.showTotal(total);
     }
 
     const productAddSubmit = (e) => {
@@ -331,16 +349,18 @@ const App = (function (ProductCtrl, UICtrl, StorageCtrl) {
         const productName = document.querySelector(UISelectors.productName).value;
         const productPrice = document.querySelector(UISelectors.productPrice).value;
 
-
         if (productName !== '' && productPrice !== '') {
             // update product
             const updatedProduct = ProductCtrl.updateProduct(productName, productPrice);
 
             // update product on UI
             let item = UICtrl.updateProduct(updatedProduct);
-            
+
             // Show price
             showPrice();
+
+            // update storage
+            StorageCtrl.updateProduct(updatedProduct);
 
             UICtrl.addingState();
         }
@@ -352,12 +372,12 @@ const App = (function (ProductCtrl, UICtrl, StorageCtrl) {
 
         UICtrl.addingState();
         UICtrl.clearBG();
-        
+
         e.preventDefault();
     }
 
     const deleteProductClick = (e) => {
-     
+
         // get selected product
         const selectedProduct = ProductCtrl.getCurrentProduct();
 
@@ -369,13 +389,16 @@ const App = (function (ProductCtrl, UICtrl, StorageCtrl) {
 
         // show price
         showPrice();
-        
+
+        // delete from storage
+        StorageCtrl.deleteProduct(selectedProduct.id);
+
         UICtrl.addingState();
 
-        if(ProductCtrl.getProducts().length == 0){
+        if (ProductCtrl.getProducts().length == 0) {
             UICtrl.hideCard();
         }
-        
+
         e.preventDefault();
     }
 
