@@ -1,0 +1,10 @@
+"use strict";
+exports.__esModule = true;
+var Taxi_1 = require("./Taxi");
+var taxi_1 = new Taxi_1.Taxi({ x: 1, y: 1 }, 'Black');
+taxi_1.travelTo({ x: 5, y: 9 });
+console.log(taxi_1.location.x);
+console.log(taxi_1.location.y);
+var taxi_2 = new Taxi_1.Taxi({ x: 2, y: 0 });
+taxi_2.travelTo({ x: 3, y: 4 });
+console.log(taxi_2.location);
