@@ -1,1 +1,2 @@
-# This repo includes codes that I have written through a javascript course.
+# Javascript Course
+This repo includes codes that I have written through a javascript course.
